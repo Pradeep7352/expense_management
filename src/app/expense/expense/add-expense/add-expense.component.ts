@@ -3,7 +3,9 @@ import { ExpenseModel } from '../../../models/espense.model';
 import { CommonService } from '../../../services/common.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConstantFile } from 'src/app/services/constantFile';
-
+import * as storeReducer from '../../../store/store.reducer';
+import { Store } from '@ngrx/store';
+import * as StoreAction from '../../../store/store.action';
 @Component({
   selector: 'app-add-expense',
   templateUrl: './add-expense.component.html',
@@ -22,10 +24,12 @@ export class AddExpenseComponent implements OnInit {
   public categoryList: any[] = [];
   public expensesList: any[] = [];
   private costantData = new ConstantFile();
-  constructor(private commonService: CommonService, private router: Router) { }
+  constructor(private commonService: CommonService, private router: Router, private store: Store<storeReducer.AppState>) { }
 
   ngOnInit() {
-
+    // this.store.select('expense').subscribe(state => {
+    //   console.log('store expenses', state);
+    // });
     if (this.commonService.getData(this.costantData.urlCategory) != null) {
       this.categoryList = this.commonService.getData(this.costantData.urlCategory);
     } else {
@@ -40,8 +44,8 @@ export class AddExpenseComponent implements OnInit {
   onSubmitExpense(ngForm) {
 
     if (this.expenseDetail.categoryName != null && this.expenseDetail.date != null) {
-      this.expensesList.push(this.expenseDetail);
       this.commonService.postData(this.costantData.urlExpense, this.expensesList);
+      this.store.dispatch(new StoreAction.AddExpensesAction({ expensesData: this.expenseDetail }));
       this.router.navigate(['']);
     } else {
       alert('Please enter proper data');

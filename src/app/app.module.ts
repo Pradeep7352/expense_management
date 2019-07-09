@@ -7,9 +7,9 @@ import { HeaderComponent } from './shared/header/header.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-
-
-
+import { StoreModule } from '@ngrx/store';
+import { storeReducer } from './store/store.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +22,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    StoreModule.forRoot({ expense: storeReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 30
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

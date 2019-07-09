@@ -4,7 +4,9 @@ import { CommonService } from '../../../services/common.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExpenseModel } from '../../../models/espense.model';
 import { ConstantFile } from 'src/app/services/constantFile';
-
+import * as storeReducer from '../../../store/store.reducer';
+import { Store } from '@ngrx/store';
+import * as StoreAction from '../../../store/store.action';
 @Component({
   selector: 'app-edit-expense',
   templateUrl: './edit-expense.component.html',
@@ -24,7 +26,7 @@ export class EditExpenseComponent implements OnInit {
   private expenseList: any[] = [];
   public categoryList: any[] = [];
   private costantData = new ConstantFile();
-  constructor(private commonService: CommonService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private commonService: CommonService, private router: Router, private activatedRoute: ActivatedRoute, private store: Store<storeReducer.AppState>) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((res: any) => {
@@ -46,7 +48,7 @@ export class EditExpenseComponent implements OnInit {
 
   onUpdateExpense(ngForm) {
     this.expenseList[this.recivedIndex] = this.expenseDetail;
-    this.commonService.postData(this.costantData.urlExpense, this.expenseList);
+    this.store.dispatch(new StoreAction.EditExpensesAction({ expensesData: this.expenseDetail, index: this.recivedIndex }));
     this.router.navigate(['']);
   }
 

@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../services/common.service';
 import { Router } from '@angular/router';
 import { ConstantFile } from 'src/app/services/constantFile';
-
+import * as storeReducer from '../../store/store.reducer';
+import * as StoreAction from '../../store/store.action';
+import { Store } from '@ngrx/store';
+import { ExpenseModel } from 'src/app/models/espense.model';
 
 
 @Component({
@@ -13,14 +16,19 @@ import { ConstantFile } from 'src/app/services/constantFile';
 })
 export class HomeComponent implements OnInit {
   public currentPageOfPagination = 1;
-  public expensesList: any = [];
+  public expensesList: Array<ExpenseModel> = [];
   private costantData = new ConstantFile();
-  constructor(private commonService: CommonService, private router: Router) { }
+  constructor(private commonService: CommonService, private router: Router, private store: Store<storeReducer.AppState>) { }
 
   ngOnInit() {
-
+    this.store.select('expense').subscribe(state => {
+      this.expensesList = state.expenses;
+      if (this.expensesList.length > 0) {
+        this.commonService.postData(this.costantData.urlExpense, this.expensesList);
+      }
+    });
     if (this.commonService.getData(this.costantData.urlExpense) != null) {
-      this.expensesList = this.commonService.getData(this.costantData.urlExpense);
+      // this.expensesList = this.commonService.getData(this.costantData.urlExpense);
     }
 
   }
