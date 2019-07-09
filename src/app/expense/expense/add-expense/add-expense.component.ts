@@ -39,9 +39,14 @@ export class AddExpenseComponent implements OnInit {
 
   onSubmitExpense(ngForm) {
 
-    this.expensesList.push(this.expenseDetail);
-    this.commonService.postData(this.costantData.urlExpense, this.expensesList);
-    this.router.navigate(['']);
+    if (this.expenseDetail.categoryName != null && this.expenseDetail.date != null) {
+      this.expensesList.push(this.expenseDetail);
+      this.commonService.postData(this.costantData.urlExpense, this.expensesList);
+      this.router.navigate(['']);
+    } else {
+      alert('Please enter proper data');
+    }
+
   }
 
 }

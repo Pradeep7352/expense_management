@@ -1,48 +1,61 @@
-<form (ngSubmit)="onSubmitExpense(f)" #f="ngForm">
-  <div class="row mainexpense">
-    <div class="col-md-6 text-center">
-      Category Name
-    </div>
-    <div class="col-md-4 text-left form-group">
-      <select class="form-control" name="category" id="category" [(ngModel)]="expenseDetail.categoryName">
-        <option *ngFor="let category of categoryList">
-          {{category.categoryName}}
-        </option>
-      </select>
-    </div>
-  </div>
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-8 offset-2">
+      <div class="card">
+        <div class="card-body">
+
+          <form (ngSubmit)="onSubmitExpense(f)" #f="ngForm">
+            <div class="row mainexpense">
+              <div class="col-md-6 text-center">
+                Category Name
+              </div>
+              <div class="col-md-6 text-left form-group">
+                <select class="form-control" name="category" id="category" [(ngModel)]="expenseDetail.categoryName">
+                  <option *ngFor="let category of categoryList">
+                    {{category.categoryName}}
+                  </option>
+                </select>
+              </div>
+            </div>
 
 
-  <div class="row">
-    <div class="col-md-6 text-center">
-      Item Name
-    </div>
-    <div class="col-md-4 text-left form-group">
-      <input type="text" class="form-control" name="itemName" [(ngModel)]="expenseDetail.itemName">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6 text-center">
-      Amount
-    </div>
-    <div class="col-md-4 text-left form-group">
-      <input type="number" class="form-control" name="amount" [(ngModel)]="expenseDetail.amount">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6 text-center">
-      Expense Date
-    </div>
-    <div class="col-md-4 text-left form-group">
-      <input type="date" class="input-group date" data-provide="datepicker" name="date"
-        [(ngModel)]="expenseDetail.date">
-    </div>
+            <div class="row">
+              <div class="col-md-6 text-center">
+                Item Name
+              </div>
+              <div class="col-md-6 text-left form-group">
+                <input type="text" class="form-control" name="itemName" [(ngModel)]="expenseDetail.itemName">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-center">
+                Amount
+              </div>
+              <div class="col-md-6 text-left form-group">
+                <input type="number" class="form-control" name="amount" [(ngModel)]="expenseDetail.amount">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-center">
+                Expense Date
+              </div>
+              <div class="col-md-6 text-left form-group">
+                <input type="date" class="input-group date" data-provide="datepicker" name="date"
+                  [(ngModel)]="expenseDetail.date">
+              </div>
 
 
-  </div>
-  <div class="row">
-    <div class="col-md-12 text-right ">
-      <button class="btn btn-sm btn-primary" [disabled]="(categoryList.length ==0)" type="submit">Save</button>
+            </div>
+            <div class="row">
+              <div class="col-md-12 text-right ">
+                <button class="btn btn-sm btn-primary" [disabled]="(categoryList.length ==0)"
+                  type="submit">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-</form>
+</div>
