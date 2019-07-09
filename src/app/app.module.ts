@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { StoreModule } from '@ngrx/store';
 import { storeReducer } from './store/store.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,9 +24,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     FormsModule,
     NgxPaginationModule,
     StoreModule.forRoot({ expense: storeReducer }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 30
-    })
+
   ],
   providers: [],
   bootstrap: [AppComponent]
