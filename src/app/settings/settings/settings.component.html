@@ -1,0 +1,48 @@
+<div class="row mainsetting">
+  <div class="col-md-4 text-center">
+    Total Budget
+  </div>
+  <div class="col-md-4 text-center form-group">
+    <input type="number" class="form-control" name="totalBudget" [(ngModel)]="budgetDetail.totalBudget">
+  </div>
+  <div class="col-md-4 text-center ">
+    <button class="btn btn-sm btn-primary" (click)="updateBudget()">Update</button>
+  </div>
+</div>
+<div class="row mainsetting">
+  <div class="col-md-4 text-center">
+    Category Name
+  </div>
+  <div class="col-md-4 text-center form-group">
+    <input type="text" class="form-control" name="categoryName" [(ngModel)]="categoryDetail.categoryName">
+  </div>
+  <div class="col-md-4 text-center ">
+    <button class="btn btn-sm btn-primary" (click)="addCategoryName()">Add</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <table class="table">
+      <tr>
+        <th>
+          Category Name
+        </th>
+        <th>
+          Delete
+        </th>
+      </tr>
+      <tr *ngFor="let item of categoryList ; let i = index ">
+
+        <td>
+
+          {{item.categoryName}}
+        </td>
+        <td>
+          <span class="fa fa-trash" (click)="onDeleteCategory(i,item.categoryName)"></span>
+        </td>
+
+      </tr>
+    </table>
+  </div>
+</div>
