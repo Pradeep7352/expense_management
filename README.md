@@ -27,3 +27,10 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Following third party modules are used 
+bootstrap : "^4.3.1",
+font-awesome: "^4.7.0",
+ngx-pagination: "^4.0.0",
+@ngrx/store: "^8.0.1",
+
